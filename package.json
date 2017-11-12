@@ -8,7 +8,6 @@
   "scripts": {
     "preinstall": "node tools/nodeVersionCheck.js",
     "setup": "node tools/setup/setupMessage.js && npm install && node tools/setup/setup.js",
-    "remove-demo": "babel-node tools/removeDemo.js",
     "start-message": "babel-node tools/startMessage.js",
     "prestart": "npm run start-message",
     "start": "concurrently -k -r -s first \"npm run test:watch\" \"npm run open:src\" \"npm run lint:watch\"",
@@ -88,6 +87,8 @@
     "rimraf": "2.6.1",
     "sass-loader": "6.0.6",
     "style-loader": "0.19.0",
+    "superagent": "3.8.1",
+    "superagent-promise": "1.1.0",
     "url-loader": "0.5.9",
     "webpack": "3.1.0",
     "webpack-bundle-analyzer": "2.8.2",
@@ -107,8 +108,7 @@
     "webpack",
     "redux",
     "flux",
-    "boilerplate",
-    "starter"
+    "fhir"
   ],
   "repository": {
     "type": "git",
