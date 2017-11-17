@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import agent from '../../agent';
 import * as actions from '../../actions/aboutServerActions';
 
 const mapStateToProps = state => ({

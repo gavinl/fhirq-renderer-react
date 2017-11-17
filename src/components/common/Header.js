@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { IndexLink } from 'react-router-redux';
+import { NavLink } from 'react-router-dom';
 
 import AsyncActive from './AsyncActive';
 
 const Header = ({ isLoading }) => {
-
+  const activeStyle = { color: 'blue' };
   return (
     <div>
       <nav>
-        <IndexLink to="/" activeClassName="active">Home</IndexLink>
-        <Link to="/about-server">About FHIR Server</Link>
+        <NavLink to="/" activeStyle={activeStyle}>Home</NavLink>
+        {" | "}
+        <NavLink to="/server" activeStyle={activeStyle}>Server Information</NavLink>
       </nav>
 
       {isLoading && <AsyncActive />}
