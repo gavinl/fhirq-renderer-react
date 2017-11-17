@@ -1,18 +1,25 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-const HomePage = () => {
-  return (
-    <div>
-      <h1>React Slingshot</h1>
+import Header from './common/Header';
 
-      <h2>Get Started</h2>
-      <ol>
-        {/* <li>Review the <Link to="/fuel-savings">demo app</Link></li> */}
-        <li>Remove the demo and start coding: npm run remove-demo</li>
-      </ol>
-    </div>
-  );
+const mapStateToProps = state => ({
+  ...state
+});
+
+class HomePage extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header isLoading={this.props.ajaxCallsInProgress > 0} />
+      </div>
+    );
+  }
+}
+
+HomePage.propTypes = {
+  ajaxCallsInProgress: PropTypes.number.isRequired
 };
 
-export default HomePage;
+export default connect(mapStateToProps, () => ({}))(HomePage);
