@@ -9,12 +9,12 @@ const Header = ({ isLoading }) => {
   return (
     <div>
       <nav>
+        {isLoading && <AsyncActive />}
         <NavLink to="/" activeStyle={activeStyle}>Home</NavLink>
         {" | "}
         <NavLink to="/server" activeStyle={activeStyle}>Server Information</NavLink>
       </nav>
 
-      {isLoading && <AsyncActive />}
     </div>
   );
 };
