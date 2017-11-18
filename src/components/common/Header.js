@@ -18,6 +18,8 @@ class Header extends React.Component {
           {this.props.isLoading && <AsyncActive />}
           <NavLink to="/" activeStyle={activeStyle}>Home</NavLink>
           {" | "}
+          <NavLink to="/questionnaire" activeStyle={activeStyle}>Questionnaires</NavLink>
+          {" | "}
           <NavLink to="/server" activeStyle={activeStyle}>Server Information</NavLink>
         </nav>
       </div>

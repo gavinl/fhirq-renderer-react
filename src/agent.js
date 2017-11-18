@@ -34,6 +34,11 @@ const Questionnaire = {
     requests.get(`/Questionnaire/${id}`)
 };
 
+const QuestionnaireResponse = {
+  byId: id =>
+    requests.get(`/QuestionnaireResponse/${id}`)
+};
+
 const Conformance = {
   metadata: () =>
     requests.get("/metadata")
@@ -41,5 +46,6 @@ const Conformance = {
 
 export default {
   Conformance,
-  Questionnaire
+  Questionnaire,
+  QuestionnaireResponse
 };
