@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/serverActions';
 import agent from '../../agent';
 
-const mapPropsToState = state => ({
+const mapStateToProps = state => ({
   ...state.server
 });
 
@@ -20,13 +20,21 @@ export class ServerPage extends React.Component {
   }
 
   render() {
+    const conformance = this.props.conformance;
+    if (conformance) {
+      return (
+        <div>
+          <h1>{conformance.implementation.description}</h1>
+          <h3>FHIR ver. {conformance.fhirVersion}</h3>
+
+          <pre>
+            {JSON.stringify(conformance, undefined, 2)}
+          </pre>
+        </div>
+      );
+    }
     return (
-      <div>
-        <h1>Server Capability Statement</h1>
-        <pre>
-          {JSON.stringify(this.props.conformance, undefined, 2)}
-        </pre>
-      </div>
+      <div />
     );
   }
 }
@@ -36,4 +44,4 @@ ServerPage.propTypes = {
   conformance: PropTypes.object
 };
 
-export default connect(mapPropsToState, mapDispatchToProps)(ServerPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ServerPage);
