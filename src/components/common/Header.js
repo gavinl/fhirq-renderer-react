@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import AsyncActive from './AsyncActive';
 
 const mapStateToProps = state => ({
-  ...state.async
+  isLoading: state.async.ajaxCallsInProgress > 0
 });
 
 class Header extends React.Component {
