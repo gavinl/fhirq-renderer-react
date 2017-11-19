@@ -13,7 +13,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: actions.SERVER_PAGE_LOADED, payload })
 });
 
-export class ServerPage extends React.Component {
+class ServerPage extends React.Component {
 
   componentWillMount() {
     this.props.onLoad(agent.Conformance.metadata());
