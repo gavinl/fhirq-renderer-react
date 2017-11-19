@@ -4,13 +4,15 @@ import { connect } from 'react-redux';
 import * as types from '../../actions/questionnaireActions';
 import agent from '../../agent';
 
+import SearchSetEntry from './SearchSetEntry';
+
 const mapStateToProps = state => ({
   ...state.questionnaire
 });
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload =>
-    dispatch({ type: types.QUESTIONNAIRE_PAGE_LOADED, payload })
+    dispatch({ type: types.QUESTIONNAIRE_LIST_LOADED, payload })
 });
 
 class QuestionList extends React.Component {
@@ -20,14 +22,23 @@ class QuestionList extends React.Component {
   }
 
   render() {
-    return (
-      <div />
-    );
+    if (this.props.questionnaireList) {
+      const entries = this.props.questionnaireList.entry.map(entry => <SearchSetEntry key={entry.fullUrl} entry={entry} />);
+
+      return (
+        <div>
+          {entries}
+        </div>
+      );
+    }
+
+    return (<div />);
   }
 }
 
 QuestionList.propTypes = {
-  onLoad: PropTypes.func
+  onLoad: PropTypes.func,
+  questionnaireList: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionList);
