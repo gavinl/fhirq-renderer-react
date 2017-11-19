@@ -5,6 +5,7 @@ import { Switch, Route } from 'react-router-dom';
 import Header from './common/Header';
 import HomePage from './HomePage';
 import ServerPage from './server';
+import QuestionnairePage from './questionnaire';
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/server" component={ServerPage} />
+          <Route path="/questionnaire" component={QuestionnairePage} />
         </Switch>
       </div>
     );

@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
 
 class QuestionList extends React.Component {
 
-  conponentWillMount() {
+  componentWillMount() {
     this.props.onLoad(agent.Questionnaire.all());
   }
 
