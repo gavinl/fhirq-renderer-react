@@ -1,9 +1,18 @@
 import React from 'react';
+import './AsyncActive.css';
 
 const AsyncActive = () => {
   return (
-    <div>
-      <h1>ASYNC ACTIVE!!!!</h1>
+    <div className="overlay-loader">
+      <div className="loader">
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
     </div>
   );
 };
