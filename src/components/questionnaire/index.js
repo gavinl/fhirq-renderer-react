@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import * as types from '../../actions/questionnaireActions';
 import agent from '../../agent';
 
+import Item from '../common/fhir/Item';
+
 const mapStateToProps = state => ({
   ...state.routing,
   ...state.questionnaire
@@ -23,11 +25,13 @@ class QuestionnairePage extends React.Component {
   }
 
   render() {
-    const id = this.props.match.params["id"];
+    const q = this.props.current;
 
+    if (!q) return <div />;
     return (
       <div>
-        <h1>{id}</h1>
+        <h1>{q.title}</h1>
+        <Item item={q.item} />
       </div>
     );
   }
@@ -35,7 +39,8 @@ class QuestionnairePage extends React.Component {
 
 QuestionnairePage.propTypes = {
   onLoad: PropTypes.func,
-  match: PropTypes.object
+  match: PropTypes.object,
+  current: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionnairePage);

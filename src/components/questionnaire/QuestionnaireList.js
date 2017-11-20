@@ -27,6 +27,7 @@ class QuestionList extends React.Component {
 
       return (
         <div>
+          <h1>Questionnaires</h1>
           {entries}
         </div>
       );
