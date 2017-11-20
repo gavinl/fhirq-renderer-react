@@ -11,17 +11,29 @@ const mapStateToProps = state => ({
 
 class Header extends React.Component {
   render() {
-    const activeStyle = { color: 'blue' };
     return (
       <div>
-        <nav>
-          {this.props.isLoading && <AsyncActive />}
-          <NavLink to="/" activeStyle={activeStyle}>Home</NavLink>
-          {" | "}
-          <NavLink to="/questionnaire" activeStyle={activeStyle}>Questionnaires</NavLink>
-          {" | "}
-          <NavLink to="/server" activeStyle={activeStyle}>Server Information</NavLink>
+        <nav className="navbar navbar-inverse navbar-fixed-top">
+          <div className="container">
+            {/* <div className="navbar-header">
+            <NavLink className="navbar-brand" to="/">Home</NavLink>
+          </div> */}
+          </div>
+          <div id="navbar" className="collapse navbar-collapse">
+            <ul className="nav navbar-nav">
+              <li>
+                <NavLink className="navbar-brand" to="/">Home</NavLink>
+              </li>
+              <li>
+                <NavLink to="/questionnaire">Questionnaires</NavLink>
+              </li>
+              <li>
+                <NavLink to="/server">Server Information</NavLink>
+              </li>
+            </ul>
+          </div>
         </nav>
+        {this.props.isLoading && <AsyncActive />}
       </div>
     );
   }
