@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Group from './Group';
+import FhirGroup from './FhirGroup';
 import FhirString from './FhirString';
+import FhirInteger from './FhirInteger';
+import FhirChoice from './FhirChoice';
+import FhirBoolean from './FhirBoolean';
+import FhirText from './FhirText';
 
 class Item extends React.Component {
   render() {
@@ -12,18 +16,35 @@ class Item extends React.Component {
       let component = null;
       switch (item.type) {
         case "group":
-          component = <Group key={item.linkId} group={item} />;
+          component = <FhirGroup key={item.linkId} group={item} />;
+          break;
+
+        case "integer":
+          component = <FhirInteger key={item.linkId} question={item} />;
           break;
 
         case "string":
           component = <FhirString key={item.linkId} question={item} />;
           break;
 
+        case "choice":
+          component = <FhirChoice key={item.linkId} question={item} />;
+          break;
+
+        case "boolean":
+          component = <FhirBoolean key={item.linkId} question={item} />;
+          break;
+
+        case "text":
+          component = <FhirText key={item.linkId} question={item} />;
+          break;
+
         default:
+          console.log("unhandled type", item.type, item);
           component = <div key={item.linkId}>{item.linkId} {item.type}</div>;
           break;
       }
-      // default
+
       return component;
     });
 

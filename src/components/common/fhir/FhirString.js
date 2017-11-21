@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TextInput from './TextInput';
-import HiddenInput from './HiddenInput';
+import TextInput from '../htmlInput/TextInput';
+import HiddenInput from '../htmlInput/HiddenInput';
 
-const findExtension = (extension, url) => {
-  return (Array.isArray(extension) && extension.find(ext => ext.url === url)) || {};
-};
+import { findExtension } from './extensions';
 
 class FhirString extends React.Component {
   render() {
@@ -19,7 +17,7 @@ class FhirString extends React.Component {
     }
 
     return (
-      <TextInput question={question} />
+      <TextInput question={question} type="text" />
     );
   }
 }
