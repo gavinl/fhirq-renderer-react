@@ -1,11 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import SelectInput from '../htmlInput/SelectInput';
 
 import { findExtension } from './extensions';
+
+const mapStateToProps = state => ({
+  ...state.questionnaire.current
+});
 
 class FhirChoice extends React.Component {
   render() {
     const question = this.props.question;
+    let options = null;
+    if (question.options) {
+      let reference = question.options.reference;
+      if (reference.startsWith("#")) {
+        const codeSystem = this.props.contained.find(item => `#${item.id}` === reference);
+        options = codeSystem.concept;
+      }
+    }
 
     if (question.repeats) {
       console.log("question repeats", question);
@@ -14,9 +28,7 @@ class FhirChoice extends React.Component {
 
     if (findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean) {
       return (
-        <div>
-          combobox
-        </div>
+        <SelectInput question={question} options={options || []} />
       );
     }
 
@@ -29,7 +41,8 @@ class FhirChoice extends React.Component {
 }
 
 FhirChoice.propTypes = {
-  question: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired,
+  contained: PropTypes.array
 };
 
-export default FhirChoice;
+export default connect(mapStateToProps)(FhirChoice);
