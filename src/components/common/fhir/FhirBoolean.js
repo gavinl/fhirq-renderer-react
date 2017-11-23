@@ -10,8 +10,8 @@ class FhirBoolean extends React.Component {
     const question = this.props.question;
 
     if (question.repeats) {
-      console.log("question repeats", question);
-      debugger;
+      console.log("question repeats", question); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
     }
 
     if (question.item) { // TODO: process enableWhen here
