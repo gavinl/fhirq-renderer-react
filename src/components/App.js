@@ -7,6 +7,7 @@ import HomePage from './HomePage';
 import ServerPage from './server';
 import QuestionnaireListPage from './questionnaire/QuestionnaireList';
 import QuestionnairePage from './questionnaire';
+import OutputPage from './output';
 
 class App extends React.Component {
 
@@ -20,6 +21,7 @@ class App extends React.Component {
             <Route path="/server" component={ServerPage} />
             <Route exact path="/questionnaire" component={QuestionnaireListPage} />
             <Route exact path="/questionnaire/:id" component={QuestionnairePage} />
+            <Route exact path="/output" component={OutputPage} />
           </Switch>
         </div>
       </div>

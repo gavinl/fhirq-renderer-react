@@ -28,6 +28,7 @@ class Header extends React.Component {
               <li><NavLink activeClassName="active" className="navbar-brand" to="/">Home</NavLink></li>
               <li><NavLink activeClassName="active" to="/questionnaire">Questionnaires</NavLink></li>
               <li><NavLink activeClassName="active" to="/server">Server Information</NavLink></li>
+              <li><NavLink activeClassName="active" to="/output">State output</NavLink></li>
             </ul>
           </div>
         </div>
