@@ -2,19 +2,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Panel } from 'react-bootstrap';
+import { Panel, Glyphicon } from 'react-bootstrap';
 
 const SearchSetEntry = ({ entry }) => {
   const resource = entry.resource;
-  const title = <h3>{resource.id}</h3>;
-  return (
-    <Panel header={title} bsStyle="default">
+  const title = (
+    <h3>
       <NavLink exact to={`/questionnaire/${resource.id}`}>
-        {resource.id}
+        {resource.title || "Untitled"}
+        &nbsp;<Glyphicon glyph="edit" />
       </NavLink>
-      <div>
-        {resource.status}
-      </div>
+    </h3>
+  );
+  return (
+    <Panel header={title} bsStyle="default" footer={entry.fullUrl}>
+      {/* eslint-disable react/no-danger */}
+      <div dangerouslySetInnerHTML={{ __html: resource.text.div }} />
+      {/* eslint-enable react/no-danger */}
     </Panel>
   );
 };
