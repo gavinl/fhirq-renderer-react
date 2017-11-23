@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const CheckboxInput = ({ question }) => {
-  console.log(question);
+
   return (
     <div className="checkbox">
       <label>

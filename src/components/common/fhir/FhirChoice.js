@@ -1,28 +1,43 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import SelectInput from '../htmlInput/SelectInput';
+import * as types from '../../../actions/questionnaireActions';
+import agent from '../../../agent';
 
-import { findExtension } from './extensions';
+import { findExtension, isExternal } from './extensions';
 
 const mapStateToProps = state => ({
-  ...state.questionnaire.current
+  valueSets: state.questionnaire.valueSets
+});
+
+const mapDispatchToProps = dispatch => ({
+  getExternalValueSet: payload =>
+    dispatch({ type: types.FETCH_EXTERNAL_VALUE_SET, payload })
 });
 
 class FhirChoice extends React.Component {
+
+  componentWillMount() {
+    let reference = this.props.question.options.reference;
+    if (isExternal(reference)) {
+      this.props.getExternalValueSet(agent.ValueSet.external(reference));
+    }
+  }
+
   render() {
     const question = this.props.question;
     let options = null;
     if (question.options) {
       let reference = question.options.reference;
-      if (reference.startsWith("#")) {
-        const codeSystem = this.props.contained.find(item => `#${item.id}` === reference);
+      let valueSets = this.props.valueSets || [];
+      const codeSystem = valueSets.find(item => item.id === reference);
+      if (codeSystem)
         options = codeSystem.concept;
-      }
     }
 
     if (question.repeats) {
-      console.log("question repeats", question);
+      console.log("this question repeats", question);
       debugger;
     }
 
@@ -42,7 +57,8 @@ class FhirChoice extends React.Component {
 
 FhirChoice.propTypes = {
   question: PropTypes.object.isRequired,
-  contained: PropTypes.array
+  valueSets: PropTypes.array,
+  getExternalValueSet: PropTypes.func
 };
 
-export default connect(mapStateToProps)(FhirChoice);
+export default connect(mapStateToProps, mapDispatchToProps)(FhirChoice);

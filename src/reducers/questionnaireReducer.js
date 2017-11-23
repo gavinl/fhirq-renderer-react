@@ -12,7 +12,14 @@ export default (state = {}, action) => {
     case actions.QUESTIONNAIRE_LOADED:
       return {
         ...state,
-        current: action.payload
+        current: action.payload,
+        valueSets: action.payload.contained
+      };
+
+      case actions.FETCH_EXTERNAL_VALUE_SET:
+      return {
+        ...state,
+        valueSets: state.valueSets.concat(action.payload)
       };
   }
 

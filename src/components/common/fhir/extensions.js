@@ -8,3 +8,7 @@
 export const findExtension = (extension, url) => {
   return (Array.isArray(extension) && extension.find(ext => ext.url === url)) || {};
 };
+
+export const isExternal = reference => {
+  return typeof reference === "string" && !reference.startsWith("#");
+};
