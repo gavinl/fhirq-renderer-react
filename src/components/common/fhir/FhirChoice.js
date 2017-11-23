@@ -37,8 +37,8 @@ class FhirChoice extends React.Component {
     }
 
     if (question.repeats) {
-      console.log("this question repeats", question);
-      debugger;
+      console.log("this question repeats", question); // eslint-disable-line no-console
+      debugger; // eslint-disable-line no-debugger
     }
 
     if (findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean) {
