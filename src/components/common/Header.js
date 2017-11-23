@@ -12,29 +12,27 @@ const mapStateToProps = state => ({
 class Header extends React.Component {
   render() {
     return (
-      <div>
-        <nav className="navbar navbar-inverse navbar-fixed-top">
-          <div className="container">
-            {/* <div className="navbar-header">
-            <NavLink className="navbar-brand" to="/">Home</NavLink>
-          </div> */}
+      <nav className="navbar navbar-inverse navbar-fixed-top">
+        <div className="container">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar" />
+              <span className="icon-bar" />
+              <span className="icon-bar" />
+            </button>
+            <NavLink className="navbar-brand" to="/">FHIR Renderer</NavLink>
           </div>
           <div id="navbar" className="collapse navbar-collapse">
             <ul className="nav navbar-nav">
-              <li>
-                <NavLink className="navbar-brand" to="/">Home</NavLink>
-              </li>
-              <li>
-                <NavLink to="/questionnaire">Questionnaires</NavLink>
-              </li>
-              <li>
-                <NavLink to="/server">Server Information</NavLink>
-              </li>
+              <li><NavLink activeClassName="active" className="navbar-brand" to="/">Home</NavLink></li>
+              <li><NavLink activeClassName="active" to="/questionnaire">Questionnaires</NavLink></li>
+              <li><NavLink activeClassName="active" to="/server">Server Information</NavLink></li>
             </ul>
           </div>
-        </nav>
+        </div>
         {this.props.isLoading && <AsyncActive />}
-      </div>
+      </nav>
     );
   }
 }

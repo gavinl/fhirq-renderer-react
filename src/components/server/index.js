@@ -24,7 +24,8 @@ class ServerPage extends React.Component {
     if (conformance) {
       return (
         <div>
-          <h1>{conformance.implementation.description}</h1>
+          <h1>Server Information</h1>
+          <h2>{conformance.implementation.description}</h2>
           <h3>FHIR ver. {conformance.fhirVersion}</h3>
 
           <pre>

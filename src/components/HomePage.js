@@ -3,7 +3,7 @@ import React from 'react';
 class HomePage extends React.Component {
   render() {
     return (
-      <div>
+      <div className="body-content">
         <h1>Home</h1>
       </div>
     );

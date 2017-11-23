@@ -34,6 +34,11 @@ const Questionnaire = {
     requests.get(`/Questionnaire/${id}`)
 };
 
+const ValueSet = {
+  external: url =>
+    requests.get(url)
+};
+
 const QuestionnaireResponse = {
   byId: id =>
     requests.get(`/QuestionnaireResponse/${id}`)
@@ -47,5 +52,6 @@ const Conformance = {
 export default {
   Conformance,
   Questionnaire,
-  QuestionnaireResponse
+  QuestionnaireResponse,
+  ValueSet
 };
