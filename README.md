@@ -1,7 +1,9 @@
-## FHIR questionnaire react renderer
+## FHIR (STU3) questionnaire HTML renderer
 
 [![Build Status](https://travis-ci.org/gavinl/fhirq-renderer-react.svg?branch=master)](https://travis-ci.org/gavinl/fhirq-renderer-react)
 [![Coverage Status](https://coveralls.io/repos/github/gavinl/fhirq-renderer-react/badge.svg?branch=master)](https://coveralls.io/github/gavinl/fhirq-renderer-react?branch=master)
+
+## Demo
 
 ## Initial setup
 1. **Install [Node >= 7.0.0](https://nodejs.org)**
