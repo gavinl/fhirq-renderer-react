@@ -27,13 +27,17 @@ class FhirChoice extends React.Component {
 
   render() {
     const question = this.props.question;
-    let options = null;
+    let options = [];
     if (question.options) {
-      let reference = question.options.reference;
-      let valueSets = this.props.valueSets || [];
-      const codeSystem = valueSets.find(item => item.id === reference);
-      if (codeSystem)
-        options = codeSystem.concept;
+      const reference = question.options.reference;
+      const valueSets = this.props.valueSets || [];
+      const valueSet = valueSets.find(item => `#${item.id}` === reference);
+      if (valueSet) {
+        valueSet.compose.include.forEach(system => {
+          const codeSystem = valueSets.find(vs => vs.url === system.system);
+          options = options.concat(codeSystem.concept);
+        });
+      }
     }
 
     if (question.repeats) {
@@ -43,7 +47,7 @@ class FhirChoice extends React.Component {
 
     if (findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean) {
       return (
-        <SelectInput question={question} options={options || []} />
+        <SelectInput question={question} options={options} />
       );
     }
 
