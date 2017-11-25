@@ -6,6 +6,7 @@ import * as types from '../../../actions/questionnaireActions';
 import agent from '../../../agent';
 
 import { findExtension, isExternal } from './extensions';
+import { findInlineOptions } from './contained';
 
 const mapStateToProps = state => ({
   valueSets: state.questionnaire.valueSets
@@ -13,32 +14,27 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getExternalValueSet: payload =>
-    dispatch({ type: types.FETCH_EXTERNAL_VALUE_SET, payload })
+    dispatch({ type: types.FETCH_EXTERNAL_VALUE_SET, payload }),
+  getInternalValueSet: payload =>
+    dispatch({ type: types.FETCH_RELATIVE_VALUE_SET, payload })
 });
 
 class FhirChoice extends React.Component {
 
   componentWillMount() {
     let reference = this.props.question.options.reference;
+    if (reference.startsWith("#")) return;
     if (isExternal(reference)) {
       this.props.getExternalValueSet(agent.ValueSet.external(reference));
+    }
+    else {
+      this.props.getInternalValueSet(agent.ValueSet.relative(reference));
     }
   }
 
   render() {
     const question = this.props.question;
-    let options = [];
-    if (question.options) {
-      const reference = question.options.reference;
-      const valueSets = this.props.valueSets || [];
-      const valueSet = valueSets.find(item => `#${item.id}` === reference);
-      if (valueSet) {
-        valueSet.compose.include.forEach(system => {
-          const codeSystem = valueSets.find(vs => vs.url === system.system);
-          options = options.concat(codeSystem.concept);
-        });
-      }
-    }
+    const options = findInlineOptions(question, this.props.valueSets);
 
     if (question.repeats) {
       console.log("this question repeats", question); // eslint-disable-line no-console
@@ -51,6 +47,7 @@ class FhirChoice extends React.Component {
       );
     }
 
+    console.log(options); // eslint-disable-line no-console
     return (
       <div>
         {question.linkId} radio
@@ -62,7 +59,8 @@ class FhirChoice extends React.Component {
 FhirChoice.propTypes = {
   question: PropTypes.object.isRequired,
   valueSets: PropTypes.array,
-  getExternalValueSet: PropTypes.func
+  getExternalValueSet: PropTypes.func,
+  getInternalValueSet: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FhirChoice);
