@@ -21,4 +21,6 @@ export const findInlineOptions = (question, contained = []) => {
   else if (question.option) {
     options = question.option;
   }
+
+  return options;
 };

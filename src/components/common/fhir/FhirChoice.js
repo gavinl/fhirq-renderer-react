@@ -22,13 +22,15 @@ const mapDispatchToProps = dispatch => ({
 class FhirChoice extends React.Component {
 
   componentWillMount() {
-    let reference = this.props.question.options.reference;
-    if (reference.startsWith("#")) return;
-    if (isExternal(reference)) {
-      this.props.getExternalValueSet(agent.ValueSet.external(reference));
-    }
-    else {
-      this.props.getInternalValueSet(agent.ValueSet.relative(reference));
+    if (this.props.question.options) {
+      const reference = this.props.question.options.reference;
+      if (reference.startsWith("#")) return;
+      if (isExternal(reference)) {
+        this.props.getExternalValueSet(agent.ValueSet.external(reference));
+      }
+      else {
+        this.props.getInternalValueSet(agent.ValueSet.relative(reference));
+      }
     }
   }
 
