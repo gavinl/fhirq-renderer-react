@@ -7,3 +7,5 @@ script: yarn run test:CI
 after_success:
   # Send coverage data to coveralls.
   - yarn run test:cover:CI
+deploy:
+  provider: azure_web_apps
