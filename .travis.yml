@@ -13,3 +13,4 @@ deploy:
   provider: azure_web_apps
   on: master
   verbose: true
+  skip_cleanup: true
