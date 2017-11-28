@@ -13,3 +13,5 @@ deploy:
   provider: azure_web_apps
   on: master
   verbose: true
+  #https://docs.travis-ci.com/user/deployment/#Uploading-Files
+  skip_cleanup: true
