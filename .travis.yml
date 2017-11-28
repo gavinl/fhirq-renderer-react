@@ -1,12 +1,14 @@
 language: node_js
 cache: yarn
 node_js:
-  - "8"
   - "7"
 script: yarn run test:CI
 after_success:
   # Send coverage data to coveralls.
   - yarn run test:cover:CI
+  # /dist is what we want to deploy
+before_deploy: "grep -v ^dist$ .gitignore > .gitignore"
+
 deploy:
   provider: azure_web_apps
   on: master
