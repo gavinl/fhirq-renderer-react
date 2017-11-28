@@ -7,7 +7,7 @@ after_success:
   # Send coverage data to coveralls.
   - yarn run test:cover:CI
 
-before_deploy: "cat .gitignore | grep -v ^dist$ > temp.gitignore && mv temp.gitignore .gitignore && cat .gitignore"
+before_deploy: "cat .gitignore | grep -v ^dist$ > temp.gitignore && mv temp.gitignore .gitignore && rm -rf node_modules"
 
 deploy:
   provider: azure_web_apps
