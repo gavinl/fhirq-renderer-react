@@ -6,6 +6,7 @@ import * as types from '../../../actions/questionnaireActions';
 import agent from '../../../agent';
 
 import { findExtension, isExternal } from './extensions';
+import { findInlineOptions } from './contained';
 
 const mapStateToProps = state => ({
   valueSets: state.questionnaire.valueSets
@@ -13,28 +14,29 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getExternalValueSet: payload =>
-    dispatch({ type: types.FETCH_EXTERNAL_VALUE_SET, payload })
+    dispatch({ type: types.FETCH_EXTERNAL_VALUE_SET, payload }),
+  getInternalValueSet: payload =>
+    dispatch({ type: types.FETCH_RELATIVE_VALUE_SET, payload })
 });
 
 class FhirChoice extends React.Component {
 
   componentWillMount() {
-    let reference = this.props.question.options.reference;
-    if (isExternal(reference)) {
-      this.props.getExternalValueSet(agent.ValueSet.external(reference));
+    if (this.props.question.options) {
+      const reference = this.props.question.options.reference;
+      if (reference.startsWith("#")) return;
+      if (isExternal(reference)) {
+        this.props.getExternalValueSet(agent.ValueSet.external(reference));
+      }
+      else {
+        this.props.getInternalValueSet(agent.ValueSet.relative(reference));
+      }
     }
   }
 
   render() {
     const question = this.props.question;
-    let options = null;
-    if (question.options) {
-      let reference = question.options.reference;
-      let valueSets = this.props.valueSets || [];
-      const codeSystem = valueSets.find(item => item.id === reference);
-      if (codeSystem)
-        options = codeSystem.concept;
-    }
+    const options = findInlineOptions(question, this.props.valueSets);
 
     if (question.repeats) {
       console.log("this question repeats", question); // eslint-disable-line no-console
@@ -43,10 +45,11 @@ class FhirChoice extends React.Component {
 
     if (findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean) {
       return (
-        <SelectInput question={question} options={options || []} />
+        <SelectInput question={question} options={options} />
       );
     }
 
+    console.log(options); // eslint-disable-line no-console
     return (
       <div>
         {question.linkId} radio
@@ -58,7 +61,8 @@ class FhirChoice extends React.Component {
 FhirChoice.propTypes = {
   question: PropTypes.object.isRequired,
   valueSets: PropTypes.array,
-  getExternalValueSet: PropTypes.func
+  getExternalValueSet: PropTypes.func,
+  getInternalValueSet: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FhirChoice);

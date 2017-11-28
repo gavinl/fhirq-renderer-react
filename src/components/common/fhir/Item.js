@@ -40,7 +40,6 @@ class Item extends React.Component {
           break;
 
         default:
-          console.log("unhandled type", item.type, item);
           component = <div key={item.linkId}>{item.linkId} {item.type}</div>;
           break;
       }

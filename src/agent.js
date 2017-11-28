@@ -35,8 +35,12 @@ const Questionnaire = {
 };
 
 const ValueSet = {
+  relative: url =>
+    requests.get(url),
   external: url =>
-    requests.get(url)
+    superagent.get(url)
+      .use(acceptPlugin)
+      .then(responseBody)
 };
 
 const QuestionnaireResponse = {
