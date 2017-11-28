@@ -7,7 +7,7 @@ after_success:
   # Send coverage data to coveralls.
   - yarn run test:cover:CI
   # /dist is what we want to deploy
-before_deploy: "grep -v ^dist$ .gitignore > .gitignore"
+before_deploy: "cat .gitignore | grep -v ^dist$ > .gitignore"
 
 deploy:
   provider: azure_web_apps
