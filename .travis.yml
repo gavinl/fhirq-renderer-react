@@ -7,8 +7,8 @@ after_success:
   # Send coverage data to coveralls.
   - yarn run test:cover:CI
 
-# remove node_modules as it will cause deploy to fail
-before_deploy: "cat .gitignore | grep -v ^dist$ > temp.gitignore && mv temp.gitignore .gitignore && rm -rf node_modules"
+before_deploy:
+ - ./tools/deploy/before_deploy.sh
 
 deploy:
   provider: azure_web_apps
