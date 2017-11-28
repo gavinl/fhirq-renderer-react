@@ -13,7 +13,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         current: action.payload,
-        valueSets: action.payload.contained
+        valueSets: action.payload.contained || []
       };
 
       case actions.FETCH_EXTERNAL_VALUE_SET:
