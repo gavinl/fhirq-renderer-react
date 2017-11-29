@@ -4,6 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/gavinl/fhirq-renderer-react/badge.svg?branch=master)](https://coveralls.io/github/gavinl/fhirq-renderer-react?branch=master)
 
 ## Demo
+Successful builds of the master branch are deployed to [http://fhirq-renderer-react.azurewebsites.net/](http://fhirq-renderer-react.azurewebsites.net/)
 
 ## Initial setup
 1. **Install [Node >= 7.0.0](https://nodejs.org)**
