@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const SelectInput = ({ question, options }) => {
-  const opts = options.map(o => <option key={o.code} value={o.code}>{o.display}</option>);
+  const opts = options.map(o => <option key={o.valueCoding.code} value={o.valueCoding.code}>{o.valueCoding.display}</option>);
 
   return (
     <div className="form-group">

@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 const RadioInput = ({ question, options }) => {
   const opts = options.map(o => (
-    <div className="radio" key={o.valueCoding.code}>
+    <div className="radio" key={o.code}>
       <label>
-        <input type="radio" name={question.linkId} id={o.valueCoding.code} value={o.valueCoding.code} />
-        {o.valueCoding.display}
+        <input type="radio" name={question.linkId} id={o.code} value={o.code} />
+        {o.display}
       </label>
     </div>
   ));
