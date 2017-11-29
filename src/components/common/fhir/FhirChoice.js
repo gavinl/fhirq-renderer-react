@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SelectInput from '../htmlInput/SelectInput';
+import RadioInput from '../htmlInput/RadioInput';
 import * as types from '../../../actions/questionnaireActions';
 import agent from '../../../agent';
 
@@ -51,9 +52,7 @@ class FhirChoice extends React.Component {
 
     console.log(options); // eslint-disable-line no-console
     return (
-      <div>
-        {question.linkId} radio
-      </div>
+      <RadioInput question={question} options={options} />
     );
   }
 }
