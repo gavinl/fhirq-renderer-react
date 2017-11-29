@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getExternalValueSet: payload =>
     dispatch({ type: types.FETCH_EXTERNAL_VALUE_SET, payload }),
-  getInternalValueSet: payload =>
+  getRelativeValueSet: payload =>
     dispatch({ type: types.FETCH_RELATIVE_VALUE_SET, payload })
 });
 
@@ -29,7 +29,7 @@ class FhirChoice extends React.Component {
         this.props.getExternalValueSet(agent.ValueSet.external(reference));
       }
       else {
-        this.props.getInternalValueSet(agent.ValueSet.relative(reference));
+        this.props.getRelativeValueSet(agent.ValueSet.relative(reference));
       }
     }
   }
@@ -62,7 +62,7 @@ FhirChoice.propTypes = {
   question: PropTypes.object.isRequired,
   valueSets: PropTypes.array,
   getExternalValueSet: PropTypes.func,
-  getInternalValueSet: PropTypes.func
+  getRelativeValueSet: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FhirChoice);
