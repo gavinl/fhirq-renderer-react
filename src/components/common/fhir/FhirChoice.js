@@ -6,7 +6,7 @@ import RadioInput from '../htmlInput/RadioInput';
 import * as types from '../../../actions/questionnaireActions';
 import agent from '../../../agent';
 
-import { findExtension, isExternal, convertOptionToCoding } from './extensions';
+import { resolveOptions, findExtension, isExternal, convertOptionToCoding } from './extensions';
 
 const mapStateToProps = state => ({
   resourceBin: state.questionnaire.resourceBin
@@ -23,8 +23,8 @@ class FhirChoice extends React.Component {
     if (this.props.question.options) {
       const reference = this.props.question.options.reference;
       if (reference.startsWith("#")) { // inline
-        // get inline valueSet
-        // get codeSystem(s) from valueSet
+        // store inline valueSet
+        // store codeSystem(s) from valueSet
       }
       if (isExternal(reference)) {
         this.props.getResource(agent.ValueSet.external(reference));
@@ -37,7 +37,7 @@ class FhirChoice extends React.Component {
 
   render() {
     const question = this.props.question;
-    const options = question.option ? convertOptionToCoding(question.option) : findResource(question.options.reference, this.props.resourceBin);
+    const options = question.option ? convertOptionToCoding(question.option) : resolveOptions(question.options.reference, this.props.resourceBin);
 
     if (question.repeats) {
       console.log("this question repeats", question); // eslint-disable-line no-console
