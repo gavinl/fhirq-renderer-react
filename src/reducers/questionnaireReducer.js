@@ -17,10 +17,18 @@ export default (state = {}, action) => {
       };
 
     case actions.FETCH_RESOURCE:
-      return {
-        ...state,
-        resourceBin: state.resourceBin.concat(action.payload)
-      };
+      if (action.error) {
+        return {
+          ...state,
+          error: action.payload
+        };
+      }
+      else {
+        return {
+          ...state,
+          resourceBin: state.resourceBin.concat(action.payload)
+        };
+      }
   }
 
   return state;
