@@ -16,10 +16,10 @@ export default (state = {}, action) => {
         resourceBin: action.payload.contained || []
       };
 
-      case actions.FETCH_RESOURCE:
+    case actions.FETCH_RESOURCE:
       return {
         ...state,
-        resourceBin: state.resourceBin.push(action.payload)
+        resourceBin: state.resourceBin.concat(action.payload)
       };
   }
 

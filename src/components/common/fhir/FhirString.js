@@ -10,7 +10,8 @@ class FhirString extends React.Component {
   render() {
     const question = this.props.question;
 
-    if (findExtension(question.extension, "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden").valueBoolean) {
+    const hiddenExt = findExtension(question.extension, "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden");
+    if (hiddenExt.valueBoolean) {
       return (
         <HiddenInput question={question} />
       );
