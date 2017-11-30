@@ -9,7 +9,7 @@ export const findExtension = (extension, url) => {
   return (Array.isArray(extension) && extension.find(ext => ext.url === url)) || {};
 };
 
-const externalServerRegex = /^http[s]*:\/\//;
+const externalServerRegex = /^http[s]?:\/\//;
 
 /**
  * Determine if a reference is absolute or relative
