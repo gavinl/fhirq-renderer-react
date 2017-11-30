@@ -36,7 +36,7 @@ const Questionnaire = {
 
 const ValueSet = {
   relative: url =>
-    requests.get(url),
+    requests.get(`/${url}`),
   external: url =>
     superagent.get(url)
       .use(acceptPlugin)

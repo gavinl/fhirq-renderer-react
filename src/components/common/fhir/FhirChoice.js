@@ -2,21 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SelectInput from '../htmlInput/SelectInput';
+import RadioInput from '../htmlInput/RadioInput';
 import * as types from '../../../actions/questionnaireActions';
 import agent from '../../../agent';
 
-import { findExtension, isExternal } from './extensions';
-import { findInlineOptions } from './contained';
+import { resolveOptions, findExtension, isExternal, convertOptionToCoding } from './extensions';
 
 const mapStateToProps = state => ({
-  valueSets: state.questionnaire.valueSets
+  resourceBin: state.questionnaire.resourceBin
 });
 
 const mapDispatchToProps = dispatch => ({
-  getExternalValueSet: payload =>
-    dispatch({ type: types.FETCH_EXTERNAL_VALUE_SET, payload }),
-  getInternalValueSet: payload =>
-    dispatch({ type: types.FETCH_RELATIVE_VALUE_SET, payload })
+  getResource: payload =>
+    dispatch({ type: types.FETCH_RESOURCE, payload })
 });
 
 class FhirChoice extends React.Component {
@@ -24,19 +22,22 @@ class FhirChoice extends React.Component {
   componentWillMount() {
     if (this.props.question.options) {
       const reference = this.props.question.options.reference;
-      if (reference.startsWith("#")) return;
+      if (reference.startsWith("#")) { // inline
+        // store inline valueSet
+        // store codeSystem(s) from valueSet
+      }
       if (isExternal(reference)) {
-        this.props.getExternalValueSet(agent.ValueSet.external(reference));
+        this.props.getResource(agent.ValueSet.external(reference));
       }
       else {
-        this.props.getInternalValueSet(agent.ValueSet.relative(reference));
+        this.props.getResource(agent.ValueSet.relative(reference));
       }
     }
   }
 
   render() {
     const question = this.props.question;
-    const options = findInlineOptions(question, this.props.valueSets);
+    const options = question.option ? convertOptionToCoding(question.option) : resolveOptions(question.options.reference, this.props.resourceBin);
 
     if (question.repeats) {
       console.log("this question repeats", question); // eslint-disable-line no-console
@@ -49,20 +50,16 @@ class FhirChoice extends React.Component {
       );
     }
 
-    console.log(options); // eslint-disable-line no-console
     return (
-      <div>
-        {question.linkId} radio
-      </div>
+      <RadioInput question={question} options={options} />
     );
   }
 }
 
 FhirChoice.propTypes = {
   question: PropTypes.object.isRequired,
-  valueSets: PropTypes.array,
-  getExternalValueSet: PropTypes.func,
-  getInternalValueSet: PropTypes.func
+  resourceBin: PropTypes.array.isRequired,
+  getResource: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FhirChoice);

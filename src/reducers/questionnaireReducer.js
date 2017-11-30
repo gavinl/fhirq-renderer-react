@@ -13,14 +13,22 @@ export default (state = {}, action) => {
       return {
         ...state,
         current: action.payload,
-        valueSets: action.payload.contained || []
+        resourceBin: action.payload.contained || []
       };
 
-      case actions.FETCH_EXTERNAL_VALUE_SET:
-      return {
-        ...state,
-        valueSets: state.valueSets.concat(action.payload)
-      };
+    case actions.FETCH_RESOURCE:
+      if (action.error) {
+        return {
+          ...state,
+          error: action.payload
+        };
+      }
+      else {
+        return {
+          ...state,
+          resourceBin: state.resourceBin.concat(action.payload)
+        };
+      }
   }
 
   return state;
