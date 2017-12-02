@@ -16,10 +16,24 @@ describe("Extensions", () => {
       const actual = sut.isExternal("ValueSet/abc123");
       expect(actual).toEqual(false);
     });
-// throws error now
-    // it("returns false for falsy", () => {
-    //   const actual = sut.isExternal(null);
-    //   expect(actual).toEqual(false);
-    // });
+
+    it("returns false for falsy url", () => {
+      expect(sut.isExternal(null)).toEqual(false);
+      expect(sut.isExternal(undefined)).toEqual(false);
+    });
+  });
+
+  describe("resolveOptions", () => {
+    const resources = [
+
+    ];
+
+    describe("when reference starts with #", () => {
+      it("discovers valueSet", () => {
+        const actual = sut.resolveOptions("hello", resources);
+        expect(actual).toBeTruthy();
+        expect(actual.length).toEqual(1);
+      });
+    });
   });
 });
