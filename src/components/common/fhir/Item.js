@@ -7,6 +7,7 @@ import FhirInteger from './FhirInteger';
 import FhirChoice from './FhirChoice';
 import FhirBoolean from './FhirBoolean';
 import FhirText from './FhirText';
+import FhirOpenChoice from './FhirOpenChoice';
 
 class Item extends React.Component {
   render() {
@@ -37,6 +38,10 @@ class Item extends React.Component {
 
         case "text":
           component = <FhirText key={item.linkId} question={item} />;
+          break;
+
+        case "open-choice":
+          component = <FhirOpenChoice key={item.linkId} question={item} />;
           break;
 
         default:
