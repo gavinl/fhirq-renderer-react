@@ -7,6 +7,10 @@ after_success:
   # Send coverage data to coveralls.
   - yarn run test:cover:CI
 
+branches:
+  only:
+    - master
+
 before_deploy: "yarn run build:CI && cat .gitignore | grep -v ^dist$ > temp.gitignore && mv temp.gitignore .gitignore && rm -rf node_modules coverage && cp tools/deploy/web.config.sample dist/web.config"
 
 deploy:
