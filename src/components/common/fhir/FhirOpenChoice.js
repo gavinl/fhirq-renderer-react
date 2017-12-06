@@ -6,7 +6,7 @@ class OpenChoice extends React.Component {
   render() {
     const question = this.props.question;
     return (
-      <TextInput question={question} />
+      <TextInput question={question} type="text" />
     );
   }
 }

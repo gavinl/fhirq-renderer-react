@@ -23,8 +23,7 @@ class FhirChoice extends React.Component {
     if (this.props.question.options) {
       const reference = this.props.question.options.reference;
       if (reference.startsWith("#")) { // inline
-        // store inline valueSet
-        // store codeSystem(s) from valueSet
+        return;
       }
       if (isExternal(reference)) {
         this.props.getResource(agent.ValueSet.external(reference));
