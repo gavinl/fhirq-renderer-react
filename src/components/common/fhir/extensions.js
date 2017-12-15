@@ -47,3 +47,21 @@ export const getFhirValue = obj => {
 
   return "";
 };
+
+export const getInitialValue = obj => {
+  if (!(typeof (obj) === "object")) throw "Expecting an object";
+  if (obj.hasOwnProperty("initialBoolean")) return obj.initialBoolean;
+  if (obj.hasOwnProperty("initialDecimal")) return obj.initialDecimal;
+  if (obj.hasOwnProperty("initialInteger")) return obj.initialInteger;
+  if (obj.hasOwnProperty("initialDate")) return obj.initialDate;
+  if (obj.hasOwnProperty("initialDateTime")) return obj.initialDateTime;
+  if (obj.hasOwnProperty("initialTime")) return obj.initialTime;
+  if (obj.hasOwnProperty("initialString")) return obj.initialString;
+  if (obj.hasOwnProperty("initialUri")) return obj.initialUri;
+  if (obj.hasOwnProperty("initialAttachment")) return obj.initialAttachment;
+  if (obj.hasOwnProperty("initialCoding")) return obj.initialCoding;
+  if (obj.hasOwnProperty("initialQuantity")) return obj.initialQuantity;
+  if (obj.hasOwnProperty("initialReference")) return obj.initialReference;
+
+  return undefined;
+};
