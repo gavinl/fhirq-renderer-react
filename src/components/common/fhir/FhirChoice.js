@@ -23,8 +23,7 @@ class FhirChoice extends React.Component {
     if (this.props.question.options) {
       const reference = this.props.question.options.reference;
       if (reference.startsWith("#")) { // inline
-        // store inline valueSet
-        // store codeSystem(s) from valueSet
+        return;
       }
       if (isExternal(reference)) {
         this.props.getResource(agent.ValueSet.external(reference));
@@ -44,14 +43,10 @@ class FhirChoice extends React.Component {
       debugger; // eslint-disable-line no-debugger
     }
 
-    if (findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean) {
-      return (
-        <SelectInput question={question} options={options} />
-      );
-    }
-
     return (
-      <RadioInput question={question} options={options} />
+      findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean ?
+        <SelectInput question={question} options={options} /> :
+        <RadioInput question={question} options={options} />
     );
   }
 }

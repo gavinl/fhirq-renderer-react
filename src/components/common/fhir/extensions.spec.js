@@ -16,6 +16,11 @@ describe("Extensions", () => {
       const actual = sut.isExternal("ValueSet/abc123");
       expect(actual).toEqual(false);
     });
+
+    it("returns false for falsy url", () => {
+      expect(sut.isExternal(null)).toEqual(false);
+      expect(sut.isExternal(undefined)).toEqual(false);
+    });
   });
 
   describe("resolveOptions", () => {

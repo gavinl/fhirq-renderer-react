@@ -6,7 +6,7 @@
  * @returns the requested extension, or an empty object
  */
 export const findExtension = (extension, url) => {
-  return Array.isArray(extension) && extension.find(ext => ext.url === url) || {};
+  return (Array.isArray(extension) && extension.find(ext => ext.url === url)) || {};
 };
 
 /**
@@ -35,11 +35,33 @@ export const resolveOptions = (reference, resources) => {
 export const convertOptionToCoding = questionOption => {
   return questionOption.map(opt => {
     if (opt.hasOwnProperty("valueCoding")) return opt.valueCoding; // STU3 this is the only possible option.
-
-    // Left here for R4
-    if (opt.hasOwnProperty("valueInteger")) return { code: `${opt.valueInteger}`, display: `${opt.valueInteger}` };
-    if (opt.hasOwnProperty("valueDate")) return { code: `${opt.valueDate}`, display: `${opt.valueDate}` };
-    if (opt.hasOwnProperty("valueTime")) return { code: `${opt.valueTime}`, display: `${opt.valueTime}` };
-    if (opt.hasOwnProperty("valueString")) return { code: `${opt.valueString}`, display: `${opt.valueString}` };
   }) || [];
+};
+
+export const getFhirValue = obj => {
+  if (!obj) return "";
+  if (obj.hasOwnProperty("valueDate")) return obj.valueDate;
+  if (obj.hasOwnProperty("valueInteger")) return obj.valueInteger;
+  if (obj.hasOwnProperty("valueTime")) return obj.valueTime;
+  if (obj.hasOwnProperty("valueString")) return obj.valueString;
+
+  return "";
+};
+
+export const getInitialValue = obj => {
+  if (!(typeof (obj) === "object")) throw "Expecting an object";
+  if (obj.hasOwnProperty("initialBoolean")) return obj.initialBoolean;
+  if (obj.hasOwnProperty("initialDecimal")) return obj.initialDecimal;
+  if (obj.hasOwnProperty("initialInteger")) return obj.initialInteger;
+  if (obj.hasOwnProperty("initialDate")) return obj.initialDate;
+  if (obj.hasOwnProperty("initialDateTime")) return obj.initialDateTime;
+  if (obj.hasOwnProperty("initialTime")) return obj.initialTime;
+  if (obj.hasOwnProperty("initialString")) return obj.initialString;
+  if (obj.hasOwnProperty("initialUri")) return obj.initialUri;
+  if (obj.hasOwnProperty("initialAttachment")) return obj.initialAttachment;
+  if (obj.hasOwnProperty("initialCoding")) return obj.initialCoding;
+  if (obj.hasOwnProperty("initialQuantity")) return obj.initialQuantity;
+  if (obj.hasOwnProperty("initialReference")) return obj.initialReference;
+
+  return undefined;
 };

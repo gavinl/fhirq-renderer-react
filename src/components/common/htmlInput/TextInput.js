@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextInput = ({ question, type }) => {
+const TextInput = ({ question, type, onChange, onBlur }) => {
   return (
-    <div className="form-group">
+    <div className={`form-group${question.required && " required"}`}>
       <label htmlFor={question.linkId}>{question.text}</label>
-      <input type={type} id={question.linkId} required={question.required} className="form-control" />
+      <input type={type} id={question.linkId} required={question.required}
+        className="form-control"
+        readOnly={question.readOnly}
+        onChange={onChange}
+        onBlur={onBlur} />
     </div>
   );
 };
@@ -13,7 +17,9 @@ const TextInput = ({ question, type }) => {
 // TODO: prop-types shape
 TextInput.propTypes = {
   question: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired
 };
 
 export default TextInput;
