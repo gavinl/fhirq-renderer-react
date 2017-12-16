@@ -8,48 +8,42 @@ import FhirChoice from './FhirChoice';
 import FhirBoolean from './FhirBoolean';
 import FhirText from './FhirText';
 import FhirOpenChoice from './FhirOpenChoice';
+import FhirDate from './FhirDate';
 
 class Item extends React.Component {
   render() {
     if (!this.props.item) return <div />;
 
     const items = this.props.item.map(item => {
-      let component = null;
+
       switch (item.type) {
         case "group":
-          component = <FhirGroup key={item.linkId} group={item} />;
-          break;
+          return <FhirGroup key={item.linkId} group={item} />;
 
         case "integer":
-          component = <FhirInteger key={item.linkId} question={item} />;
-          break;
+          return <FhirInteger key={item.linkId} question={item} />;
 
         case "string":
-          component = <FhirString key={item.linkId} question={item} />;
-          break;
+          return <FhirString key={item.linkId} question={item} />;
 
         case "choice":
-          component = <FhirChoice key={item.linkId} question={item} />;
-          break;
+          return <FhirChoice key={item.linkId} question={item} />;
 
         case "boolean":
-          component = <FhirBoolean key={item.linkId} question={item} />;
-          break;
+          return <FhirBoolean key={item.linkId} question={item} />;
 
         case "text":
-          component = <FhirText key={item.linkId} question={item} />;
-          break;
+          return <FhirText key={item.linkId} question={item} />;
 
         case "open-choice":
-          component = <FhirOpenChoice key={item.linkId} question={item} />;
-          break;
+          return <FhirOpenChoice key={item.linkId} question={item} />;
+
+        case "date":
+          return <FhirDate key={item.linkId} question={item} />;
 
         default:
-          component = <div key={item.linkId}>{item.linkId} {item.type}</div>;
-          break;
+          return <div key={item.linkId}>{item.linkId} {item.type}</div>;
       }
-
-      return component;
     });
 
     return (

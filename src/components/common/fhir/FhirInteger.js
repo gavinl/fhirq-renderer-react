@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TextInput from '../htmlInput/TextInput';
 import { getInitialValue } from './extensions';
 
-class FhirString extends React.Component {
+class FhirInteger extends React.Component {
   render() {
     const question = this.props.question;
     const initialValue = getInitialValue(question);
@@ -15,8 +15,8 @@ class FhirString extends React.Component {
   }
 }
 
-FhirString.propTypes = {
+FhirInteger.propTypes = {
   question: PropTypes.object.isRequired
 };
 
-export default FhirString;
+export default FhirInteger;

@@ -6,7 +6,7 @@
  * @returns the requested extension, or an empty object
  */
 export const findExtension = (extension, url) => {
-  return Array.isArray(extension) && extension.find(ext => ext.url === url) || {};
+  return (Array.isArray(extension) && extension.find(ext => ext.url === url)) || {};
 };
 
 /**
