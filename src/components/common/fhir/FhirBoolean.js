@@ -14,6 +14,10 @@ class FhirBoolean extends React.Component {
       debugger; // eslint-disable-line no-debugger
     }
 
+    if(question.enableWhen) {
+      debugger;
+    }
+
     if (question.item) { // TODO: process enableWhen here
       return (
         <div>

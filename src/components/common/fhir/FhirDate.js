@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import TextInput from '../htmlInput/TextInput';
 
 class FhirDate extends React.Component {
 
@@ -24,7 +23,19 @@ class FhirDate extends React.Component {
     const question = this.props.question;
 
     return (
-      <TextInput question={question} type="date" onChange={this.onChange} onBlur={this.onBlur} />
+      <div className={`form-group${question.required && " required"}`}>
+        <label htmlFor={question.linkId}>{question.text}</label>
+        <div className="input-group">
+          <input type="date" id={question.linkId} required={question.required}
+            className="form-control"
+            readOnly={question.readOnly}
+            onChange={this.onChange}
+            onBlur={this.onBlur} />
+          <div className="input-group-addon">
+            <span className="glyphicon glyphicon-calendar" />
+          </div>
+        </div>
+      </div>
     );
   }
 }
