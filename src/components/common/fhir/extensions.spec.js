@@ -32,6 +32,45 @@ describe("Extensions", () => {
     });
 
   });
+
+  describe("getInitialValue", () => {
+    it("doesn't accept non-object", () => {
+      expect(() => {
+        sut.getInitialValue(true);
+      }).toThrow();
+    });
+    it("doesn't accept non-object", () => {
+      expect(() => {
+        sut.getInitialValue(undefined);
+      }).toThrow();
+    });
+
+    it("returns undefined when no available property found", () => {
+      const actual = sut.getInitialValue({ test: "asdf" });
+      expect(actual).not.toBeDefined();
+    });
+
+
+    it("finds false initialBoolean", () => {
+      const actual = sut.getInitialValue({ initialBoolean: false });
+      expect(actual).toEqual(false);
+    });
+
+    it("finds true initialBoolean", () => {
+      const actual = sut.getInitialValue({ initialBoolean: true });
+      expect(actual).toEqual(true);
+    });
+
+    it("finds initialDecimal", () => {
+      const actual = sut.getInitialValue({ initialDecimal: 2.3 });
+      expect(actual).toEqual(2.3);
+    });
+
+    it("finds initialReference", () => {
+      const actual = sut.getInitialValue({ initialReference: "/ValueSet/abc" });
+      expect(actual).toEqual("/ValueSet/abc");
+    });
+  });
 });
 
 
