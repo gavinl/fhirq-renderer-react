@@ -16,11 +16,11 @@ class FhirString extends React.Component {
     super();
 
     // bind this
-    this.onAnswerChange = this.onAnswerChange.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.validate = this.validate.bind(this);
   }
 
-  onAnswerChange(event) {
+  onChange(event) {
     event.target.value;
   }
 
@@ -36,7 +36,7 @@ class FhirString extends React.Component {
     const isHidden = findExtension(question.extension, "http://hl7.org/fhir/StructureDefinition/questionnaire-hidden").valueBoolean;
     return (isHidden ?
       <HiddenInput question={question} /> :
-      <TextInput question={question} type="text" onAnswerChange={this.onAnswerChange} onBlur={this.validate} errors />
+      <TextInput question={question} type="text" onChange={this.onChange} onBlur={this.validate} errors />
     );
   }
 }

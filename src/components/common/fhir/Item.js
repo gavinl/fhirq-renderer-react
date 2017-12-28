@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { findItem } from './itemUtils';
 
 import FhirGroup from './FhirGroup';
 import FhirString from './FhirString';
@@ -10,15 +13,25 @@ import FhirText from './FhirText';
 import FhirOpenChoice from './FhirOpenChoice';
 import FhirDate from './FhirDate';
 
+const mapStateToProps = state => ({
+  root: state.questionnaire.current.item
+});
+
 class Item extends React.Component {
   render() {
     if (!this.props.item) return <div />;
 
     const items = this.props.item.map(item => {
-
+      let display = false;
       switch (item.type) {
         case "group":
-          return <FhirGroup key={item.linkId} group={item} />;
+          if (item.enableWhen) {
+            for (let i = 0; i < item.enableWhen.length; i++) {
+              display = findItem(item.enableWhen[i].question, this.props.root);
+            }
+          }
+
+          return <FhirGroup key={item.linkId} group={item} display={display} />;
 
         case "integer":
           return <FhirInteger key={item.linkId} question={item} />;
@@ -55,7 +68,8 @@ class Item extends React.Component {
 }
 
 Item.propTypes = {
-  item: PropTypes.array
+  item: PropTypes.array,
+  root: PropTypes.array
 };
 
-export default Item;
+export default connect(mapStateToProps)(Item);
