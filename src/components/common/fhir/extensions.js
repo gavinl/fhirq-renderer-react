@@ -6,7 +6,7 @@
  * @returns the requested extension, or an empty object
  */
 export const findExtension = (extension, url) => {
-  return Array.isArray(extension) && extension.find(ext => ext.url === url) || {};
+  return (Array.isArray(extension) && extension.find(ext => ext.url === url)) || {};
 };
 
 /**
@@ -50,4 +50,22 @@ export const getFhirValue = obj => {
   if (obj.hasOwnProperty("valueString")) return obj.valueString;
 
   return "";
+};
+
+export const getInitialValue = obj => {
+  if (!(typeof (obj) === "object")) throw "Expecting an object";
+  if (obj.hasOwnProperty("initialBoolean")) return obj.initialBoolean;
+  if (obj.hasOwnProperty("initialDecimal")) return obj.initialDecimal;
+  if (obj.hasOwnProperty("initialInteger")) return obj.initialInteger;
+  if (obj.hasOwnProperty("initialDate")) return obj.initialDate;
+  if (obj.hasOwnProperty("initialDateTime")) return obj.initialDateTime;
+  if (obj.hasOwnProperty("initialTime")) return obj.initialTime;
+  if (obj.hasOwnProperty("initialString")) return obj.initialString;
+  if (obj.hasOwnProperty("initialUri")) return obj.initialUri;
+  if (obj.hasOwnProperty("initialAttachment")) return obj.initialAttachment;
+  if (obj.hasOwnProperty("initialCoding")) return obj.initialCoding;
+  if (obj.hasOwnProperty("initialQuantity")) return obj.initialQuantity;
+  if (obj.hasOwnProperty("initialReference")) return obj.initialReference;
+
+  return undefined;
 };

@@ -52,14 +52,10 @@ class FhirChoice extends React.Component {
       debugger; // eslint-disable-line no-debugger
     }
 
-    if (findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean) {
-      return (
-        <SelectInput question={question} options={options} />
-      );
-    }
-
     return (
-      <RadioInput question={question} options={options} />
+      findExtension(question.extension, "http://standards.healthconnex.com.au/fhir/StructureDefinition/Questionnaire-hcx-combobox").valueBoolean ?
+        <SelectInput question={question} options={options} /> :
+        <RadioInput question={question} options={options} />
     );
   }
 }

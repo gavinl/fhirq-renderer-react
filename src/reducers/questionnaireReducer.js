@@ -13,6 +13,7 @@ export default (state = {}, action) => {
       return {
         ...state,
         current: action.payload,
+        validationErrors: [],
         resourceBin: action.payload.contained || []
       };
 

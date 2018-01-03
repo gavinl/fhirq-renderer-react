@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import { findItem } from './itemUtils';
 
 import FhirGroup from './FhirGroup';
 import FhirString from './FhirString';
@@ -8,48 +11,52 @@ import FhirChoice from './FhirChoice';
 import FhirBoolean from './FhirBoolean';
 import FhirText from './FhirText';
 import FhirOpenChoice from './FhirOpenChoice';
+import FhirDate from './FhirDate';
+
+const mapStateToProps = state => ({
+  root: state.questionnaire.current.item
+});
 
 class Item extends React.Component {
   render() {
     if (!this.props.item) return <div />;
 
     const items = this.props.item.map(item => {
-      let component = null;
+      let display = false;
       switch (item.type) {
         case "group":
-          component = <FhirGroup key={item.linkId} group={item} />;
-          break;
+          if (item.enableWhen) {
+            for (let i = 0; i < item.enableWhen.length; i++) {
+              display = findItem(item.enableWhen[i].question, this.props.root);
+            }
+          }
+
+          return <FhirGroup key={item.linkId} group={item} display={display} />;
 
         case "integer":
-          component = <FhirInteger key={item.linkId} question={item} />;
-          break;
+          return <FhirInteger key={item.linkId} question={item} />;
 
         case "string":
-          component = <FhirString key={item.linkId} question={item} />;
-          break;
+          return <FhirString key={item.linkId} question={item} />;
 
         case "choice":
-          component = <FhirChoice key={item.linkId} question={item} />;
-          break;
+          return <FhirChoice key={item.linkId} question={item} />;
 
         case "boolean":
-          component = <FhirBoolean key={item.linkId} question={item} />;
-          break;
+          return <FhirBoolean key={item.linkId} question={item} />;
 
         case "text":
-          component = <FhirText key={item.linkId} question={item} />;
-          break;
+          return <FhirText key={item.linkId} question={item} />;
 
         case "open-choice":
-          component = <FhirOpenChoice key={item.linkId} question={item} />;
-          break;
+          return <FhirOpenChoice key={item.linkId} question={item} />;
+
+        case "date":
+          return <FhirDate key={item.linkId} question={item} />;
 
         default:
-          component = <div key={item.linkId}>{item.linkId} {item.type}</div>;
-          break;
+          return <div key={item.linkId}>{item.linkId} {item.type}</div>;
       }
-
-      return component;
     });
 
     return (
@@ -61,7 +68,8 @@ class Item extends React.Component {
 }
 
 Item.propTypes = {
-  item: PropTypes.array
+  item: PropTypes.array,
+  root: PropTypes.array
 };
 
-export default Item;
+export default connect(mapStateToProps)(Item);

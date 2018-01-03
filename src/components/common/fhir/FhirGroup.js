@@ -4,7 +4,8 @@ import { Panel } from 'react-bootstrap';
 
 import Item from './Item';
 
-const Group = ({ group }) => {
+const Group = ({ group, display }) => {
+  if (display) debugger;
   return (
     <Panel header={group.text} bsStyle="default">
       <Item item={group.item} />
@@ -13,7 +14,8 @@ const Group = ({ group }) => {
 };
 
 Group.propTypes = {
-  group: PropTypes.object.isRequired
+  group: PropTypes.object.isRequired,
+  display: PropTypes.bool
 };
 
 export default Group;
