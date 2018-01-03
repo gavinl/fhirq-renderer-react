@@ -2,17 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const RadioInput = ({ question, options }) => {
-  const opts = options.map(o => (
-    <div className="radio" key={o.code}>
-      <label>
-        <input type="radio" name={question.linkId} id={o.code} value={o.code} />
-        {o.display}
-      </label>
-    </div>
-  ));
+
   return (
     <div>
-      {opts}
+      <fieldset>
+        <legend>{question.text}</legend>
+        {options.map(o => (
+          <div className="radio" key={o.code}>
+            <label>
+              <input type="radio" name={question.linkId} id={o.code} value={o.code} />
+              {o.display}
+            </label>
+          </div>
+        ))}
+      </fieldset>
     </div>
   );
 };

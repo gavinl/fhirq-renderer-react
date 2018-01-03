@@ -20,19 +20,28 @@ const mapDispatchToProps = dispatch => ({
 class FhirChoice extends React.Component {
 
   componentWillMount() {
-    if (this.props.question.options) {
-      const reference = this.props.question.options.reference;
-      if (reference.startsWith("#")) { // inline
-        return;
-      }
-      if (isExternal(reference)) {
-        this.props.getResource(agent.ValueSet.external(reference));
-      }
-      else {
-        this.props.getResource(agent.ValueSet.relative(reference));
-      }
+    if (!this.props.question.options)
+      return;
+
+    const reference = this.props.question.options.reference;
+
+    if (!reference)
+      throw "Missing reference";
+    if (!(typeof (reference) === "string"))
+      throw "reference is not a string";
+
+    if (reference.startsWith("#")) { // inline
+      return;
+    }
+
+    if (isExternal(reference)) {
+      this.props.getResource(agent.ValueSet.external(reference));
+    }
+    else {
+      this.props.getResource(agent.ValueSet.relative(reference));
     }
   }
+
 
   render() {
     const question = this.props.question;
