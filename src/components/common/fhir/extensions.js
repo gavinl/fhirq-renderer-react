@@ -28,7 +28,11 @@ export const resolveOptions = (reference, resources) => {
         }
       });
     }
+    return options;
   }
+
+  debugger;
+
   return options;
 };
 
