@@ -18,8 +18,8 @@ const TextInput = ({ question, type, onChange, onBlur }) => {
 TextInput.propTypes = {
   question: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func
 };
 
 export default TextInput;

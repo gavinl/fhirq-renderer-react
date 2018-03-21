@@ -12,6 +12,7 @@ import FhirBoolean from './FhirBoolean';
 import FhirText from './FhirText';
 import FhirOpenChoice from './FhirOpenChoice';
 import FhirDate from './FhirDate';
+import { compareFhirBoolean } from './extensions';
 
 const mapStateToProps = state => ({
   root: state.questionnaire.current.item
@@ -22,12 +23,18 @@ class Item extends React.Component {
     if (!this.props.item) return <div />;
 
     const items = this.props.item.map(item => {
-      let display = false;
+      let display = true;
       switch (item.type) {
         case "group":
-          if (item.enableWhen) {
+          if (Array.isArray(item.enableWhen)) {
+            console.log("enableWhen", item.enableWhen);
             for (let i = 0; i < item.enableWhen.length; i++) {
-              display = findItem(item.enableWhen[i].question, this.props.root);
+              const enableWhen = item.enableWhen[i];
+              if (!enableWhen) throw `enableWhen is ${enableWhen}`;
+              const item = findItem(enableWhen.question, this.props.root);
+              if (item) {
+                display = compareFhirBoolean(enableWhen, item);
+              }
             }
           }
 

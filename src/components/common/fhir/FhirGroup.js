@@ -5,9 +5,9 @@ import { Panel } from 'react-bootstrap';
 import Item from './Item';
 
 const Group = ({ group, display }) => {
-  if (display) debugger;
+  display;
   return (
-    <Panel header={group.text} bsStyle="default">
+    <Panel header={group.text} bsStyle="default" display={false}>
       <Item item={group.item} />
     </Panel >
   );
