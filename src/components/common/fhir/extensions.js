@@ -52,6 +52,16 @@ export const getFhirValue = obj => {
   return "";
 };
 
+export const compareFhirBoolean = (lhs, rhs) => {
+  if (!lhs) return false;
+  if (!rhs) return false;
+
+  return hasEqualProperty(lhs, rhs, "valueBoolean");
+};
+
+const hasSameProperty = (lhs, rhs, propName) => lhs.hasOwnProperty(propName) && rhs.hasOwnProperty(propName);
+export const hasEqualProperty = (lhs, rhs, propName) => hasSameProperty(lhs, rhs, propName) && lhs[propName] === rhs[propName];
+
 export const getInitialValue = obj => {
   if (!(typeof (obj) === "object")) throw "Expecting an object";
   if (obj.hasOwnProperty("initialBoolean")) return obj.initialBoolean;
