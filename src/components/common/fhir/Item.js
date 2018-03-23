@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { findItem } from './itemUtils';
+//import { findItem } from './itemUtils';
 
 import FhirGroup from './FhirGroup';
 import FhirString from './FhirString';
@@ -12,7 +12,7 @@ import FhirBoolean from './FhirBoolean';
 import FhirText from './FhirText';
 import FhirOpenChoice from './FhirOpenChoice';
 import FhirDate from './FhirDate';
-import { compareFhirBoolean } from './extensions';
+//import { compareFhirBoolean } from './extensions';
 
 const mapStateToProps = state => ({
   root: state.questionnaire.current.item
