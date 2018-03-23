@@ -31,6 +31,7 @@
   "author": "Gavin Lang",
   "license": "MIT",
   "dependencies": {
+    "npm": "5.7.1",
     "object-assign": "4.1.0",
     "react": "16.2.0",
     "react-bootstrap": "0.31.5",
