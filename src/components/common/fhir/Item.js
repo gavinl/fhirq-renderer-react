@@ -26,17 +26,17 @@ class Item extends React.Component {
       let display = true;
       switch (item.type) {
         case "group":
-          if (Array.isArray(item.enableWhen)) {
-            console.log("enableWhen", item.enableWhen);
-            for (let i = 0; i < item.enableWhen.length; i++) {
-              const enableWhen = item.enableWhen[i];
-              if (!enableWhen) throw `enableWhen is ${enableWhen}`;
-              const item = findItem(enableWhen.question, this.props.root);
-              if (item) {
-                display = compareFhirBoolean(enableWhen, item);
-              }
-            }
-          }
+          // if (Array.isArray(item.enableWhen)) {
+          //   console.log("enableWhen", item.enableWhen);
+          //   for (let i = 0; i < item.enableWhen.length; i++) {
+          //     const enableWhen = item.enableWhen[i];
+          //     if (!enableWhen) throw `enableWhen is ${enableWhen}`;
+          //     const item = findItem(enableWhen.question, this.props.root);
+          //     if (item) {
+          //       display = compareFhirBoolean(enableWhen, item);
+          //     }
+          //   }
+          // }
 
           return <FhirGroup key={item.linkId} group={item} display={display} />;
 
