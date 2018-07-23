@@ -1,3 +1,3 @@
 export default {
-  baseUrl: "http://sqlonfhir-stu3.azurewebsites.net/fhir"
+  baseUrl: "https://sqlonfhir-stu3.azurewebsites.net/fhir"
 };
