@@ -45,7 +45,9 @@ class FhirChoice extends React.Component {
 
   render() {
     const question = this.props.question;
-    const options = question.option ? convertOptionToCoding(question.option) : resolveOptions(question.options.reference, this.props.resourceBin);
+    const options = question.option ?
+      convertOptionToCoding(question.option) :
+      resolveOptions(question.options.reference, this.props.resourceBin);
 
     if (question.repeats) {
       console.log("this question repeats", question); // eslint-disable-line no-console

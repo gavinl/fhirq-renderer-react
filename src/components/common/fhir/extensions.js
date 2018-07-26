@@ -13,7 +13,8 @@ export const findExtension = (extension, url) => {
  * Determine if a reference is absolute or relative
  * @param {string} reference
  */
-export const isExternal = reference => /^http[s]?:\/\//.test(reference);
+export const isExternal = reference =>
+  /^https?:\/\//.test(reference);
 
 export const resolveOptions = (reference, resources) => {
   let options = [];
