@@ -9,7 +9,7 @@ const API_ROOT = config.baseUrl;
 const responseBody = res => res.body;
 
 const acceptPlugin = req => {
-  req.set("Accept", "application/json+fhir");
+  req.set("Accept", "application/fhir+json");
 };
 
 let token = null;
@@ -29,7 +29,7 @@ const requests = {
 
 const Questionnaire = {
   all: () =>
-    requests.get("/Questionnaire"),
+    requests.get("/Questionnaire?_summary=true&_count=50"),
   byId: id =>
     requests.get(`/Questionnaire/${id}`)
 };
@@ -44,13 +44,11 @@ const ValueSet = {
 };
 
 const QuestionnaireResponse = {
-  byId: id =>
-    requests.get(`/QuestionnaireResponse/${id}`)
+  byId: id => requests.get(`/QuestionnaireResponse/${id}`)
 };
 
 const Conformance = {
-  metadata: () =>
-    requests.get("/metadata")
+  metadata: () => requests.get("/metadata?_summary=true")
 };
 
 export default {
