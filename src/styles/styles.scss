@@ -30,3 +30,21 @@ h2 {
     }
   }
 }
+
+.questionnaire-status {
+  float: right;
+  text-transform: capitalize;
+  padding: 5px;
+}
+
+.questionnaire-status-draft {
+  background-color: lightyellow;
+  border: 1px solid yellow;
+}
+
+.questionnaire-status-active {
+  background-color: lightgreen;
+  border: 1px solid green;
+}
+
+
