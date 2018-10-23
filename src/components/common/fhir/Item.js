@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-//import { findItem } from './itemUtils';
+import { findItem } from './itemUtils';
 
 import FhirGroup from './FhirGroup';
 import FhirString from './FhirString';
@@ -12,7 +12,7 @@ import FhirBoolean from './FhirBoolean';
 import FhirText from './FhirText';
 import FhirOpenChoice from './FhirOpenChoice';
 import FhirDate from './FhirDate';
-//import { compareFhirBoolean } from './extensions';
+import { compareFhirBoolean } from './extensions';
 
 const mapStateToProps = state => ({
   root: state.questionnaire.current.item
@@ -26,19 +26,20 @@ class Item extends React.Component {
       let display = true;
       switch (item.type) {
         case "group":
-          // if (Array.isArray(item.enableWhen)) {
-          //   console.log("enableWhen", item.enableWhen);
-          //   for (let i = 0; i < item.enableWhen.length; i++) {
-          //     const enableWhen = item.enableWhen[i];
-          //     if (!enableWhen) throw `enableWhen is ${enableWhen}`;
-          //     const item = findItem(enableWhen.question, this.props.root);
-          //     if (item) {
-          //       display = compareFhirBoolean(enableWhen, item);
-          //     }
-          //   }
-          // }
 
-          return <FhirGroup key={item.linkId} group={item} display={display} />;
+          if (Array.isArray(item.enableWhen)) {
+            for (let i = 0; i < item.enableWhen.length; i++) {
+              const enableWhen = item.enableWhen[i];
+              const item = findItem(enableWhen.question, this.props.root);
+              debugger;
+              if (item) {
+                display = compareFhirBoolean(enableWhen, item);
+              }
+              else throw `${enableWhen.question} not found`;
+            }
+          }
+
+          return <FhirGroup key={item.linkId} group={item} enable={display} />;
 
         case "integer":
           return <FhirInteger key={item.linkId} question={item} />;
