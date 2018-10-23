@@ -7,22 +7,23 @@ import moment from 'moment';
 
 const SearchSetEntry = ({ entry }) => {
   const resource = entry.resource;
-  const lastUpdated = moment(entry.resource.meta.lastUpdated);
-  console.log(entry);
+  const lastUpdated = moment(resource.meta.lastUpdated);
+  const created = moment(resource.date);
   return (
     <Panel bsStyle="default">
       <Panel.Heading>
+        <div className="questionnaire-status-container">
+          <div className={resource.status}>{resource.status}</div>
+        </div>
         <h3>
           <NavLink exact to={`/questionnaire/${resource.id}`}>
-            {resource.title || "Untitled"}
+            {resource.title || "No Title"}
             &nbsp;<Glyphicon glyph="edit" />
           </NavLink>
-          <span className={`questionnaire-status questionnaire-status-${resource.status}`}>{resource.status}</span>
         </h3>
       </Panel.Heading>
       <Panel.Body>
-        {resource.date && `Created ${moment(resource.date).format('LLLL')}`}
-        <br />
+        Created {created.format('LLL')}<br />
         {entry.fullUrl}
       </Panel.Body>
       <Panel.Footer>

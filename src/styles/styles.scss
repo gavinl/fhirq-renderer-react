@@ -31,20 +31,20 @@ h2 {
   }
 }
 
-.questionnaire-status {
+.questionnaire-status-container {
   float: right;
-  text-transform: capitalize;
-  padding: 5px;
+
+  div {
+    text-transform: capitalize;
+    padding: 5px 15px 5px 15px;
+  }
+  .draft {
+    background-color: lightyellow;
+    border: 1px solid yellow;
+  }
+
+  .active {
+    background-color: lightgreen;
+    border: 1px solid green;
+  }
 }
-
-.questionnaire-status-draft {
-  background-color: lightyellow;
-  border: 1px solid yellow;
-}
-
-.questionnaire-status-active {
-  background-color: lightgreen;
-  border: 1px solid green;
-}
-
-

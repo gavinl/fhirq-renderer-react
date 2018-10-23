@@ -4,11 +4,19 @@ import { Panel } from 'react-bootstrap';
 
 import Item from './Item';
 
-const Group = ({ group, display }) => {
-  display;
+const Group = ({ group }) => {
+
   return (
-    <Panel header={group.text} bsStyle="default" display={false}>
-      <Item item={group.item} />
+    <Panel bsStyle="default">
+      <Panel.Heading>
+        <h3>
+          {group.text} {group.enableWhen && `(${JSON.stringify(group.enableWhen)})`}
+        </h3>
+
+      </Panel.Heading>
+      <Panel.Body>
+        <Item item={group.item} />
+      </Panel.Body>
     </Panel >
   );
 };
