@@ -1,3 +1,4 @@
+import { getFhirValue } from './extensions';
 
 
 export const findItem = (linkId, root) => {
@@ -14,4 +15,16 @@ export const findItem = (linkId, root) => {
     return null;
   }
 };
+
+export const isEnabled = (item, root) => {
+  if (!item) return false;
+  if (Array.isArray(item.enableWhen)) {
+    const enabled = item.enableWhen.every(condition => {
+      const item = findItem(condition.question, root);
+      const result = item && (getFhirValue(item) === getFhirValue(condition));
+      return result;
+    });
+    return enabled;
+  }
+}
 

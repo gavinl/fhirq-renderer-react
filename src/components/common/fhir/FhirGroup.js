@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Panel } from 'react-bootstrap';
+import { isEnabled } from './itemUtils';
 
 import Item from './Item';
 
-const Group = ({ group }) => {
+const Group = ({ group, root }) => {
+
+  if (group.enableWhen && isEnabled(group, root)) {
+    return <div />;
+  }
 
   return (
     <Panel bsStyle="default">
       <Panel.Heading>
         <h3>
-          {group.text} {group.enableWhen && `(${JSON.stringify(group.enableWhen)})`}
+          {group.text}
         </h3>
 
       </Panel.Heading>
@@ -23,7 +28,8 @@ const Group = ({ group }) => {
 
 Group.propTypes = {
   group: PropTypes.object.isRequired,
-  display: PropTypes.bool
+  display: PropTypes.bool,
+  root: PropTypes.array.isRequired
 };
 
 export default Group;

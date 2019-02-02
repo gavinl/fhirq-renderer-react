@@ -44,13 +44,14 @@ export const convertOptionToCoding = questionOption => {
 };
 
 export const getFhirValue = obj => {
-  if (!obj) return "";
+  if (!obj) return undefined;
+  if (obj.hasOwnProperty("valueBoolean")) return obj.valueBoolean;
   if (obj.hasOwnProperty("valueDate")) return obj.valueDate;
   if (obj.hasOwnProperty("valueInteger")) return obj.valueInteger;
   if (obj.hasOwnProperty("valueTime")) return obj.valueTime;
   if (obj.hasOwnProperty("valueString")) return obj.valueString;
 
-  return "";
+  return undefined;
 };
 
 export const compareFhirBoolean = (lhs, rhs) => {
