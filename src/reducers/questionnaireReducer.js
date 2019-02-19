@@ -9,6 +9,11 @@ export default (state = {}, action) => {
         questionnaireList: action.payload
       };
 
+    case actions.QUESTIONNAIRE_LIST_FILTER:
+      return {
+        ...state,
+        questionnaireList: action.payload
+      };
     case actions.QUESTIONNAIRE_LOADED:
       return {
         ...state,

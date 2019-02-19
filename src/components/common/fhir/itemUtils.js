@@ -26,5 +26,5 @@ export const isEnabled = (item, root) => {
     });
     return enabled;
   }
-}
+};
 

@@ -31,7 +31,9 @@ const Questionnaire = {
   all: () =>
     requests.get("/Questionnaire?_summary=true&_count=50"),
   byId: id =>
-    requests.get(`/Questionnaire/${id}`)
+    requests.get(`/Questionnaire/${id}`),
+  byTitle: title =>
+    requests.get(`/Questionnaire?_summary=true&_count=50&title=${title}`)
 };
 
 const ValueSet = {

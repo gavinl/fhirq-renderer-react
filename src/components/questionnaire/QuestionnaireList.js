@@ -12,13 +12,33 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   onLoad: payload =>
-    dispatch({ type: types.QUESTIONNAIRE_LIST_LOADED, payload })
+    dispatch({ type: types.QUESTIONNAIRE_LIST_LOADED, payload }),
+  filter: payload =>
+    dispatch({ type: types.QUESTIONNAIRE_LIST_FILTER, payload })
 });
 
 class QuestionList extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = { filter: '' };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentWillMount() {
     this.props.onLoad(agent.Questionnaire.all());
+  }
+
+  handleSubmit(event) {
+    if (this.state.filter)
+      this.props.filter(agent.Questionnaire.byTitle(this.state.filter));
+    else agent.Questionnaire.all();
+    event.preventDefault();
+
+  }
+  handleChange(event) {
+    this.setState({ filter: event.target.value });
   }
 
   render() {
@@ -28,6 +48,13 @@ class QuestionList extends React.Component {
       return (
         <div>
           <h1>Questionnaires</h1>
+          <div className="row">
+            {/* TODO: autocomplete */}
+            <form onSubmit={this.handleSubmit}>
+              <input type="text" className="form-control" onChange={this.handleChange} />
+              <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Filter by title</button>
+            </form>
+          </div>
           {entries}
         </div>
       );
@@ -39,6 +66,7 @@ class QuestionList extends React.Component {
 
 QuestionList.propTypes = {
   onLoad: PropTypes.func,
+  filter: PropTypes.func,
   questionnaireList: PropTypes.object
 };
 
