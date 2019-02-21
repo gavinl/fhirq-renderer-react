@@ -48,13 +48,13 @@ class QuestionList extends React.Component {
       return (
         <div>
           <h1>Questionnaires</h1>
-          <div className="row">
-            {/* TODO: autocomplete */}
-            <form onSubmit={this.handleSubmit}>
-              <input type="text" className="form-control" onChange={this.handleChange} />
-              <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Filter by title</button>
-            </form>
-          </div>
+          {/* TODO: autocomplete */}
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input type="text" className="form-control" onChange={this.handleChange} placeholder="Filter" />
+              <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Apply</button>
+            </div>
+          </form>
           {entries}
         </div>
       );

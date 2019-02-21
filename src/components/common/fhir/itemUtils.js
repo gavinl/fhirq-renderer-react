@@ -19,12 +19,20 @@ export const findItem = (linkId, root) => {
 export const isEnabled = (item, root) => {
   if (!item) return false;
   if (Array.isArray(item.enableWhen)) {
+    console.group(`Evaluating enableWhen for ${item.linkId}`);
     const enabled = item.enableWhen.every(condition => {
+      console.group("condition:", condition);
       const item = findItem(condition.question, root);
-      const result = item && (getFhirValue(item) === getFhirValue(condition));
+      console.log("item:", item);
+      const result = !!(item && item.answer && (getFhirValue(item.answer) === getFhirValue(condition)));
+      console.log(`result: ${result}`);
+      console.groupEnd();
       return result;
     });
+    console.log(`isEnabled: ${enabled}`);
+    console.groupEnd();
     return enabled;
   }
+  return false;
 };
 
