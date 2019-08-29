@@ -1,4 +1,5 @@
 import * as actions from '../actions/questionnaireActions';
+import { findItem } from '../components/common/fhir/itemUtils';
 
 export default (state = {}, action) => {
 
@@ -22,6 +23,12 @@ export default (state = {}, action) => {
         resourceBin: action.payload.contained || []
       };
 
+    case actions.QUESTIONNAIRE_SET_ANSWER:
+      return {
+        ...state,
+        current: replaceQuestion(state.current, action.linkId, action.answer)
+      };
+
     case actions.FETCH_RESOURCE:
       if (action.error) {
         return {
@@ -38,4 +45,10 @@ export default (state = {}, action) => {
   }
 
   return state;
+};
+
+/// eslint-disable-once no-unused-vars
+const replaceQuestion = (questionnaire, linkId, answer) => {
+  console.log(JSON.stringify(answer));
+  debugger;
 };

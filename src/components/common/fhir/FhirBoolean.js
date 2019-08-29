@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-//import { findExtension } from './extensions';
 import CheckboxInput from '../htmlInput/CheckboxInput';
 import Item from './Item';
+import * as types from '../../../actions/questionnaireActions';
+
+const mapDispatchToProps = dispatch => {
+  // eslint-disable-next-line no-unused-labels
+  setAnswer: (linkId, answer) =>
+    dispatch({ type: types.QUESTIONNAIRE_SET_ANSWER, action: { linkId, answer } });
+};
 
 class FhirBoolean extends React.Component {
   constructor(props) {
@@ -11,7 +18,8 @@ class FhirBoolean extends React.Component {
   }
 
   inputChanged(event) {
-    this.props.setAnswer(this.props.question.linkId, event.target.checked);
+    const answer = { fhirBoolean: event.target.checked };
+    this.props.setAnswer(this.props.question.linkId, answer);
   }
   render() {
     const question = this.props.question;
@@ -37,7 +45,8 @@ class FhirBoolean extends React.Component {
 }
 
 FhirBoolean.propTypes = {
-  question: PropTypes.object.isRequired
+  question: PropTypes.object.isRequired,
+  setAnswer: PropTypes.func.isRequired
 };
 
-export default FhirBoolean;
+export default connect(() => { }, mapDispatchToProps)(FhirBoolean);
