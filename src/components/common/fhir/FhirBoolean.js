@@ -15,10 +15,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 class FhirBoolean extends React.Component {
   constructor(props) {
     super(props);
-    this.toggle = this.toggle.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
-  toggle(event) {
+  onChange(event) {
     const answer = { fhirBoolean: event.target.checked };
     const question = this.props.question;
     this.props.setAnswer(question.linkId, answer);
@@ -35,14 +35,14 @@ class FhirBoolean extends React.Component {
     if (question.item) {
       return (
         <div>
-          <CheckboxInput question={question} onChange={this.toggle} />
+          <CheckboxInput question={question} onChange={this.onChange} />
           <Item item={question.item} />
         </div>
       );
     }
 
     return (
-      <CheckboxInput question={question} onChange={this.toggle} />
+      <CheckboxInput question={question} onChange={this.onChange} />
     );
   }
 }
