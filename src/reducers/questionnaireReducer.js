@@ -1,5 +1,4 @@
 import * as actions from '../actions/questionnaireActions';
-import { findItem } from '../components/common/fhir/itemUtils';
 
 export default (state = {}, action) => {
 

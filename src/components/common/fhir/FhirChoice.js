@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SelectInput from '../htmlInput/SelectInput';
 import RadioInput from '../htmlInput/RadioInput';
-import * as types from '../../../actions/questionnaireActions';
+import { FETCH_RESOURCE, FETCH_EXTERNAL_VALUE_SET } from '../../../actions/questionnaireActions';
 import agent from '../../../agent';
 
 import { resolveOptions, findExtension, isExternal, convertOptionToCoding } from './extensions';
@@ -14,11 +14,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getResource: payload =>
-    dispatch({ type: types.FETCH_RESOURCE, payload })
+    dispatch({ type: FETCH_RESOURCE, payload }),
+  getExternalValueSet: payload =>
+    dispatch({ type: FETCH_EXTERNAL_VALUE_SET, payload })
 });
 
-class FhirChoice extends React.Component {
 
+class FhirChoice extends React.Component {
   componentWillMount() {
     if (!this.props.question.options)
       return;

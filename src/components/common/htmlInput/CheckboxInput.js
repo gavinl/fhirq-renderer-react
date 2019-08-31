@@ -13,7 +13,6 @@ const CheckboxInput = ({ question, onChange }) => {
   );
 };
 
-// TODO: prop-types shape
 CheckboxInput.propTypes = {
   question: PropTypes.object.isRequired,
   onChange: PropTypes.func
