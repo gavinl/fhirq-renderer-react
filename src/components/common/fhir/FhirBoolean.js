@@ -8,7 +8,14 @@ import { QUESTIONNAIRE_SET_ANSWER } from '../../../actions/questionnaireActions'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setAnswer: answer => dispatch({ type: QUESTIONNAIRE_SET_ANSWER, action: { linkId: ownProps.question.linkId, answer } })
+    setAnswer: answer => {
+      const action = {
+        linkId: ownProps.question.linkId,
+        answer: answer
+      };
+      debugger;
+      dispatch({ type: QUESTIONNAIRE_SET_ANSWER, action: action });
+    }
   };
 };
 

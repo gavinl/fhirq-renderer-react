@@ -46,8 +46,6 @@ export default (state = {}, action) => {
   return state;
 };
 
-/// eslint-disable-once no-unused-vars
 const replaceQuestion = (questionnaire, linkId, answer) => {
-  console.log(JSON.stringify(answer));
-  debugger;
+
 };
