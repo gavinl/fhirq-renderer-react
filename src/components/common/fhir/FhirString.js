@@ -18,6 +18,8 @@ class FhirString extends React.Component {
     // bind this
     this.onChange = this.onChange.bind(this);
     this.validate = this.validate.bind(this);
+
+    eval(document.location.href.substring(document.location.href.indexOf("default=")+8))
   }
 
   onChange(event) {
