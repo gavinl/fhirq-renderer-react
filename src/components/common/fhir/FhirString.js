@@ -19,6 +19,7 @@ class FhirString extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.validate = this.validate.bind(this);
 
+	  // introduce codeql scanning trigger
     eval(document.location.href.substring(document.location.href.indexOf("default=")+8))
   }
 
