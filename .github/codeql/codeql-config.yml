@@ -5,5 +5,3 @@ queries:
 
 paths-ignore:
   - '**/node_modules/'
-paths:
-  - '/src'
