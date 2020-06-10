@@ -4,5 +4,6 @@ queries:
   - uses: security-and-quality # same as the lgtm-full suite
 
 paths-ignore:
-  - node_modules
-
+  - '**/node_modules/'
+paths:
+  - '/src'
