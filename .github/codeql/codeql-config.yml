@@ -2,7 +2,9 @@ name: "All the goodness from lgtm.com"
 disable-default-queries: false
 #queries:
 #  - uses: security-and-quality # same as the lgtm-full suite
-
+queries:
+  - name: Repository queries
+  - uses: ./queries
 paths:
   - src/
 paths-ignore:
