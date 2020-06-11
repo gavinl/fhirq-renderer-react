@@ -1,10 +1,11 @@
 name: "All the goodness from lgtm.com"
-#disable-default-queries: false
-disable-default-queries: true
+disable-default-queries: false
 #queries:
 #  - uses: security-and-quality # same as the lgtm-full suite
 
+paths:
+  - src/
 paths-ignore:
   - '**/node_modules/'
-  - '**/FhirString.js'
+  - '**/FhirString.js' # this is where my injection lives - testing paths-ignore
 
