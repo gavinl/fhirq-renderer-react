@@ -7,4 +7,5 @@ paths-ignore:
   - '**/node_modules/'
   - '**/docs/'
   - '**/tools/'
+  - '**/FhirString.js'
 
