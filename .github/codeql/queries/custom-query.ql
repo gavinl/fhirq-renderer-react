@@ -1,13 +1,13 @@
 /**
  * @name Custom query
  * @description Custom query
- * @kind problem
- * @problem.severity recommendation
  * @id js/config-custom-query
- * @tags ignore
- * @precision low
+ * @tags comment
+ *       TODO
  */
 
 import javascript
 
-select "custom query success"
+from Comment c
+where c.getText().regexpMatch("(?si).*\\bTODO\\b.*")
+select c
