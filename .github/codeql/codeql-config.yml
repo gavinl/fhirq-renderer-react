@@ -4,7 +4,7 @@ disable-default-queries: false
 #  - uses: security-and-quality # same as the lgtm-full suite
 queries:
   - name: Repository queries
-  - uses: ./queries
+  - uses: ./.github/codeql/queries
 paths:
   - src/
 paths-ignore:
