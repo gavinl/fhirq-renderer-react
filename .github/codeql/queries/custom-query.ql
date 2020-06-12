@@ -4,7 +4,7 @@
  * @id my-custom-queries/find-all-comments
  * @tags comments
  * @kind problem
- * @problem.severity recommendation
+ * @problem.severity warning
  */
 
 import javascript
