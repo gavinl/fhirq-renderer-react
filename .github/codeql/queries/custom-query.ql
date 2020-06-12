@@ -11,4 +11,4 @@ import javascript
 
 from Comment c
 where c.getText().regexpMatch("(?si).*\\bTODO\\b.*")
-select c
+select c.getFile(), "TODO comment $@", c, c.getText()
