@@ -1,5 +1,6 @@
-name: "All the goodness from lgtm.com"
-disable-default-queries: false
+#name: "All the goodness from lgtm.com"
+name: Custom queries
+disable-default-queries: true
 #queries:
 #  - uses: security-and-quality # same as the lgtm-full suite
 queries:

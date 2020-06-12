@@ -1,7 +1,7 @@
 /**
  * @name Custom query
  * @description Custom query
- * @id js/find-all-comments
+ * @id my-custom-queries/find-all-comments
  * @tags comments
  */
 
