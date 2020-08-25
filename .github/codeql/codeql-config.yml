@@ -1,9 +1,14 @@
-name: "All the goodness from lgtm.com"
+#name: "All the goodness from lgtm.com"
+name: Custom queries
 disable-default-queries: false
+#queries:
+#  - uses: security-and-quality # same as the lgtm-full suite
 queries:
-  - uses: security-and-quality # same as the lgtm-full suite
-
+  - name: Repository queries
+  - uses: ./.github/codeql/queries
+paths:
+  - src/
 paths-ignore:
   - '**/node_modules/'
-  - '**/FhirString.js'
+  - '**/FhirString.js' # this is where my injection lives - testing paths-ignore
 
