@@ -5,5 +5,4 @@ queries:
 
 paths-ignore:
   - '**/node_modules/'
-  - '**/FhirString.js'
-  - '**/ignore.js'
+
