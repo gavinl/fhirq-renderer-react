@@ -31,7 +31,7 @@
   "author": "Gavin Lang",
   "license": "MIT",
   "dependencies": {
-    "moment": "2.22.2",
+    "moment": "2.29.2",
     "node-sass": "^4.13.0",
     "object-assign": "4.1.1",
     "react": "^16.11.0",
